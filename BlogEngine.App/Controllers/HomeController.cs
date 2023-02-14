@@ -18,7 +18,7 @@ namespace BlogEngine.App.Controllers
 
         public IActionResult Index()
         {
-            PostViewModel vm = new PostViewModel(_postRepository);
+            HomeViewModel vm = new HomeViewModel(_postRepository);
             return View(vm);
         }
 

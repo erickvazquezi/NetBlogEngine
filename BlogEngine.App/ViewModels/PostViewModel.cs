@@ -4,16 +4,12 @@ namespace BlogEngine.App.ViewModels
 {
     public class PostViewModel
     {
-        public Post? HeaderPost { get; set; }
-        public Post? SecondPost { get; set; }
-        public Post? ThirdPost { get; set; }
+        public Post? CurrentPost { get; set; }
         private IPostRepository _postRepository { get; set; }
-        public PostViewModel(IPostRepository postRepository) 
+        public PostViewModel(IPostRepository postRepository, int IdPost) 
         {
             _postRepository = postRepository;
-            HeaderPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 1);
-            SecondPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 2);
-            ThirdPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 3);
+            CurrentPost = _postRepository.GetPostById(IdPost);
         }
     }
 }
