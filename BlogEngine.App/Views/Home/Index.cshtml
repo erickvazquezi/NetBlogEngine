@@ -74,27 +74,44 @@
             <h3 class="pb-4 mb-4 fst-italic border-bottom">
                 Otras publicaciones
             </h3>
+          
+            <div id="pagedList"></div>
+            <nav class="blog-pagination" aria-label="Pagination">
+                <button id="previousBtn" class="btn btn-outline-primary" href="">Anterior</button>
+                <button id="nextBtn" class="btn btn-outline-primary" href="" tabindex="-1">Siguiente</button>
+            </nav>
 
-            @if (Model?.AllPost != null && Model.AllPost.Count > 0)
-            {
-                for (int i = 0; i < Model.AllPost.Count; i++)
-                {
-                    <article class="blog-post">
-                        <h2 class="blog-post-title">@Model.AllPost[i].Title</h2>
-                        <p class="blog-post-meta">@Model.AllPost[i].CreateDate.ToShortDateString() 
-                            @Model.AllPost[i].Author
-                        </p>
-                        <p>@Model.AllPost[i].Description</p>
-                        @Html.ActionLink("Ver publicación..", "Index", "Post", new {IdPost = @Model.AllPost[i].Id}, new { @class = ""})
-                        <hr>
-                    </article>
-                }
-            }         
-            
-            @*pagination  <nav class="blog-pagination" aria-label="Pagination">
-                <a class="btn btn-outline-primary" href="">Antiguos</a>
-                <a class="btn btn-outline-secondary disabled" href="" tabindex="-1" aria-disabled="true">Nuevos</a>
-            </nav>*@
+            @section Scripts{
+                <script>
+                    var fun = function () {
+                        {
+                            var _url = '@Url.Action("GetPostComponent", "Home")';
+                            $.ajax({
+                                type: "GET",
+                                url: _url,
+                                data: {
+                                    page: $("#currentIndex").text(),
+                                    totalPages: $("#totalPages").text(),
+                                    caller: $(this).text()
+                                },
+                                success: function (result) {
+                                    $("#pagedList").html(result);
+                                },
+                            });
+                        }
+                    };
+
+                    $(document).ready(function () {
+                        $('#previousBtn').click(fun);
+                    });
+
+                    $(document).ready(function () {
+                        $('#nextBtn').click(fun);
+                    });
+
+                    fun();
+                </script>
+            }
 
         </div>
 
