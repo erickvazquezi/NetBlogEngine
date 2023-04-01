@@ -10,19 +10,19 @@ namespace BlogEngine.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IPostRepository _postRepository;
 
-        public HomeController(ILogger<HomeController> logger, IPostRepository postRepository)
+        public HomeController(IPostRepository postRepository)
         {
-            _logger = logger;
             _postRepository = postRepository;
         }
 
         public IActionResult Index()
         {
             HomeViewModel vm = new HomeViewModel(_postRepository);
-            var allPosts = _postRepository.GetAllPosts().Where(p => p.Order == 0).ToList();
+            vm.HeaderPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 1);
+            vm.SecondPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 2);
+            vm.ThirdPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 3);
             return View(vm);
         }
 

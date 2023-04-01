@@ -4,3 +4,6 @@
 .vs/ProjectEvaluation
 BlogEngine.App/bin
 BlogEngine.App/obj
+BlogEngine.App/Migrations
+BlogEnginte.Tests/bin
+BlogEnginte.Tests/obj

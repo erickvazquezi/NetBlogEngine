@@ -16,9 +16,6 @@ namespace BlogEngine.App.ViewModels
         public HomeViewModel(IPostRepository postRepository)
         {
             _postRepository = postRepository;
-            HeaderPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 1);
-            SecondPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 2);
-            ThirdPost = _postRepository.GetAllPosts().FirstOrDefault(p => p.Order == 3);
         }
     }
 }
