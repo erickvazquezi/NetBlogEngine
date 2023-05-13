@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngine.App.Models
 {
-    public class BlogEngineDbContext : DbContext
+    public class BlogEngineDbContext : IdentityDbContext
     {
         public BlogEngineDbContext(DbContextOptions<BlogEngineDbContext> options) : base(options) { }
 
